@@ -4,16 +4,19 @@ import Card from './Card'
 const Newsapp = () => {
     const [search, setSearch] = useState("india");
     const [newsData, setNewsData] = useState(null)
-    const REACT_APP_NEWS_API_KEY = "9c3ed8ee95884dec979460a60f96675b";
+    
 
-    const getData = async() =>{
-        const response = await fetch(`https://newsapi.org/v2/everything?q=${search}&apiKey=${REACT_APP_NEWS_API_KEY}`);
-        const jsonData = await response.json();
-        console.log(jsonData.articles);
-        let dt = jsonData.articles.slice(0,10)
-        setNewsData(dt)
-        
-    }
+   const getData = async () => {
+  const response = await fetch(
+    `https://newsapi.org/v2/everything?q=${search}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
+  );
+  const jsonData = await response.json();
+  console.log(jsonData.articles);
+
+  let dt = jsonData.articles.slice(0, 10);
+  setNewsData(dt);
+}
+
 
     useEffect(()=>{
         getData()
